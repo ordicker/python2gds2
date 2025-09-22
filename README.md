@@ -38,18 +38,28 @@ This bridges **MLIR/CIRCT compiler technology** with **open hardware design tool
    └───────┬───────┘
            │ CIRCT lowering
            ▼
-   ┌───────────────┐
-   │   Verilog RTL │
-   └───────┬───────┘
-           │ Integration
-           ▼
+   ┌───────────────┐         ╭─────────╮
+   │   Verilog RTL │     ╭───┤OpenPOWER│ 
+   └───────┬───────┘     │   ╰─────────╯
+           │ Integration │  
+           ▼             ▼  
    ┌───────────────────────┐
-   │ OpenLane → GDSII      │
+   │      OpenLane         │
    └─────────┬─────────────┘
+	         ▼   
+          ╭─────╮
+          │GDSII│
+          ╰─────╯
 ```
 
+## Deliverables
+- Example Python function compiled to Verilog via MLIR/CIRCT.
+- Verilog integrated with OpenPOWER core.
+- Full flow script from python to GDSII 
 
-
+## Stretch Goals
+- using AI only to connect the python end with the OpenPOWER core
+- design a working JTAG interface for OpenPOWER
 
 # OpenFrame Overview
 
