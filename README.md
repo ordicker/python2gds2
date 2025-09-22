@@ -1,3 +1,56 @@
+# Project proposal 
+
+# Python-to-OpenPOWER Accelerator Flow (POC)
+
+## Overview
+This project demonstrates a **proof-of-concept flow** for compiling a Python function (e.g., a neural network, but not restricted to ML workloads) into **synthesizable Verilog**, integrating it with an **OpenPOWER core** for control, and completing the ASIC flow down to **GDSII** using OpenLane.
+
+The final prototype will allow a Python function to be:
+1. Compiled → MLIR (StableHLO via JAX JIT export).
+2. Lowered → Verilog RTL using [CIRCT](https://circt.llvm.org/).
+3. Integrated → OpenPOWER core (input/output control, parameter updates).
+4. Synthesized → GDSII using [OpenLane](https://github.com/The-OpenROAD-Project/OpenLane).
+5. Controlled → via JTAG (for chip bring-up and testing).
+
+---
+
+## Motivation
+- **Software-defined hardware**: Allow developers to quickly map Python code into accelerators.  
+- **OpenPOWER integration**: Use OpenPOWER as the "host" to configure and interact with generated accelerators.  
+- **Open-source silicon flow**: Demonstrate a complete open flow from Python → Verilog → GDSII.  
+
+This bridges **MLIR/CIRCT compiler technology** with **open hardware design tools**, showing the potential for **fast prototyping of custom accelerators**.
+
+---
+
+## Block Diagram
+
+```text
+   ┌───────────────┐
+   │   Python fn   │
+   │ (e.g. NN)     │
+   └───────┬───────┘
+           │ JAX JIT
+           ▼
+   ┌───────────────┐
+   │  MLIR / HLO   │
+   │ (StableHLO)   │
+   └───────┬───────┘
+           │ CIRCT lowering
+           ▼
+   ┌───────────────┐
+   │   Verilog RTL │
+   └───────┬───────┘
+           │ Integration
+           ▼
+   ┌───────────────────────┐
+   │ OpenLane → GDSII      │
+   └─────────┬─────────────┘
+```
+
+
+
+
 # OpenFrame Overview
 
 The OpenFrame Project provides an empty harness chip that differs significantly from the Caravel and Caravan designs. Unlike Caravel and Caravan, which include integrated SoCs and additional features, OpenFrame offers only the essential padframe, providing users with a clean slate for their custom designs.
